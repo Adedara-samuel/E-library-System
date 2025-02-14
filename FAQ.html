@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ - E-book</title>
+  <link rel="stylesheet" href="styling.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+  <header>
+    <div class="header1">
+      <a href="#" class="logo"><i class="fas fa-book"></i> E-book</a>
+      <form class="search-form">
+        <input type="search" placeholder="Search here...">
+        <label class="fas fa-search" for="search"></label>
+      </form>
+      <div class="icons">
+        <div class="fas fa-search" id="search_btn"></div>
+        <a href="#" class="fas fa-heart"></a>
+        <a href="profile.html" class="fas fa-user"></a>
+        <div class="fas fa-sign-out-alt" id="logout-btn"></div>
+      </div>
+    </div>
+
+    <!-- favourite sidebar  -->
+    <div class="fav-sidebar">
+      <div class="sidebar-header">
+        <h3>Favorites</h3>
+        <button class="close-btn"><i class="fa fa-times"></i></button>
+      </div>
+      <div class="sidebar-content">
+        <!-- Favorite items will be dynamically added here -->
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="side-bar">
+      <nav class="navbar">
+        <a href="dashboard.html"><i class="fas fa-home"></i><span>Dashboard</span></a>
+        <a href="profile.html"><i class="fas fa-user"></i><span>Profile</span></a>
+        <a href="course.html"><i class="fas fa-book"></i><span>Course</span></a>
+        <a href="adminblock.html"><i class="fas fa-briefcase"></i><span>Admin Block</span></a>
+        <a href="faq.html" class="active"><i class="fas fa-question-circle"></i><span>FAQ</span></a>
+      </nav>
+      <button class="toggle-btn"><i class="fas fa-arrow-left"></i></button>
+    </div>
+
+    <nav class="bottom-nav show">
+      <a href="dashboard.html" class="fas fa-home"></a>
+      <a href="profile.html" class="fas fa-user"></a>
+      <a href="course.html" class="fas fa-book"></a>
+      <a href="adminblock.html" class="fas fa-briefcase"></a>
+      <a href="faq.html" class="fas fa-question-circle"></a>
+    </nav>
+    <div class="body">
+      <div class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+          <h3>How do I download a book?</h3>
+          <p>To download a book, navigate to the course page and click on the download link provided for each book.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How do I change my password?</h3>
+          <p>You can change your password by visiting the Profile section and selecting the 'Change Password' option.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h3>Are there any video tutorials available?</h3>
+          <p>Yes, we provide video tutorials for various courses. You can find them on the Course page under each course
+            description.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How can I contact support?</h3>
+          <p>For any support-related queries, please send an email to the department admin or locate
+            the adminblock.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+  <script src="fav.js"></script>
+</body>
+
+</html>

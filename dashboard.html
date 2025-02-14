@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styling.css">
+    <script src="script.js"></script>
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </head>
+
+  <body>
+    <header>
+      <div class="header1">
+        <a href="#" class="logo"><i class="fas fa-book"></i> E-book</a>
+        <form class="search-form">
+          <input type="search" placeholder="Search here..." id="search-box">
+          <label for="search-box" class="fas fa-search"></label>
+        </form>
+        <div class="icons">
+          <div id="search_btn" class="fas fa-search"></div>
+          <a href="#" class="fas fa-heart"></a>
+          <a href="profile.html" class="fas fa-user"></a>
+          <div id="logout-btn" class="fas fa-sign-out-alt"></div>
+        </div>
+      </div>
+
+      <!-- Favourite sidebar -->
+      <div class="fav-sidebar">
+        <div class="sidebar-header">
+          <h3>Favorites</h3>
+          <button class="close-btn"><i class="fa fa-times"></i></button>
+        </div>
+        <div class="sidebar-content">
+          <!-- Favorite items will be dynamically added here -->
+        </div>
+      </div>
+    </header>
+    <div class="side-bar">
+      <nav class="navbar">
+        <a href="dashboard.html"><i
+            class="fas fa-home"></i><span>Dashboard</span></a>
+        <a href="profile.html"><i
+            class="fas fa-user"></i><span>Profile</span></a>
+        <a href="course.html"><i
+            class="fas fa-book"></i><span>Course</span></a>
+        <a href="adminblock.html"><i class="fas fa-briefcase"></i><span>Admin
+            Block</span></a>
+        <a href="FAQ.html"><i
+            class="fas fa-question-circle"></i><span>FAQ</span></a>
+      </nav>
+      <button class="toggle-btn"><i class="fas fa-arrow-left"></i></button>
+    </div>
+
+    <nav class="bottom-nav show">
+      <a href="dashboard.html" class="fas fa-home"></a>
+      <a href="profile.html" class="fas fa-user"></a>
+      <a href="course.html" class="fas fa-book"></a>
+      <a href="adminblock.html" class="fas fa-briefcase"></a>
+      <a href="FAQ.html" class="fas fa-question-circle"></a>
+    </nav>
+
+    <section>
+      <div class="body">
+        <h1>Dashboard</h1>
+        <div class="section-title">Recommended Books</div>
+        <div class="recommended-books-dropdown section-container"></div>
+
+        <div class="section-title">New Arrivals</div>
+        <div class="new-arrival-container section-container"></div>
+
+        <div class="section-title">Favorite Books</div>
+        <div class="fav-container section-container"></div>
+
+        <div class="section-title">Videos</div>
+        <div class="videos-container section-container"></div>
+      </div>
+    </section>
+
+    <!-- Full-Screen Overlay for Book and Video Preview -->
+    <div id="preview-overlay" class="overlay">
+      <div class="overlay-content">
+        <span id="close-preview" class="close-btn">&times;</span>
+        <iframe id="preview-frame" src frameborder="0"></iframe>
+      </div>
+    </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const apiUrls = {
+        recommended: 'https://www.googleapis.com/books/v1/volumes?q=subject:fiction&key=AIzaSyDhPs30ugnwJsmDujXweYWyGBSUJ7Y_5Ic',
+        newArrivals: 'https://www.googleapis.com/books/v1/volumes?q=subject:nonfiction&key=AIzaSyDhPs30ugnwJsmDujXweYWyGBSUJ7Y_5Ic',
+        favorites: 'https://www.googleapis.com/books/v1/volumes?q=subject:fantasy&key=AIzaSyDhPs30ugnwJsmDujXweYWyGBSUJ7Y_5Ic',
+        videos: 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=7&q=video&key=AIzaSyAFmYLmrHko4QCwlEukuVIoMsjRVGS52H0',
+      };
+
+      const overlay = document.getElementById("preview-overlay");
+      const previewFrame = document.getElementById("preview-frame");
+      const closePreview = document.getElementById("close-preview");
+
+      const fetchAndDisplayBooks = (url, containerSelector) => {
+        fetch(url)
+          .then(response => response.json())
+          .then(data => {
+            const container = document.querySelector(containerSelector);
+            container.innerHTML = '';
+
+            if (data.items && data.items.length > 0) {
+              data.items.forEach(item => {
+                const book = item.volumeInfo;
+                const bookElement = document.createElement('div');
+                bookElement.className = 'book';
+                bookElement.innerHTML = `
+                  <div class="book-cover">
+                    <img src="${book.imageLinks?.thumbnail || 'default-thumbnail.jpg'}" alt="${book.title}">
+                  </div>
+                  <div class="book-info">
+                    <h4>${book.title}</h4>
+                    <p>${book.authors?.join(', ') || 'Unknown Author'}</p>
+                    <button onclick="loadBookPreview('${item.id}')">Read Preview</button>
+                  </div>
+                `;
+                container.appendChild(bookElement);
+              });
+            } else {
+              container.innerHTML = '<p>No books found.</p>';
+            }
+          })
+          .catch(error => console.error('Error fetching books:', error));
+      };
+
+      const fetchAndDisplayVideos = (url, containerSelector) => {
+        fetch(url)
+          .then(response => response.json())
+          .then(data => {
+            const container = document.querySelector(containerSelector);
+            container.innerHTML = '';
+
+            if (data.items && data.items.length > 0) {
+              data.items.forEach(item => {
+                const video = item.snippet;
+                const videoElement = document.createElement('div');
+                videoElement.className = 'video';
+                videoElement.innerHTML = `
+                  <div class="video-info">
+                    <h4>${video.title}</h4>
+                    <p>${video.channelTitle}</p>
+                  </div>
+                  <button onclick="loadVideoPreview('${item.id.videoId}')">Watch Video</button>
+                `;
+                container.appendChild(videoElement);
+              });
+            } else {
+              container.innerHTML = '<p>No videos found. API ERROR</p>';
+            }
+          })
+          .catch(error => console.error('Error fetching videos:', error));
+      };
+
+      window.loadBookPreview = (bookId) => {
+        previewFrame.src = `https://books.google.com/books?id=${bookId}&printsec=frontcover&output=embed`;
+        overlay.style.display = "flex";
+      };
+
+      window.loadVideoPreview = (videoId) => {
+        previewFrame.src = `https://www.youtube.com/embed/${videoId}`;
+        overlay.style.display = "flex";
+      };
+
+      closePreview.addEventListener("click", () => {
+        overlay.style.display = "none";
+        previewFrame.src = "";
+      });
+
+      // Fetch books and videos
+      fetchAndDisplayBooks(apiUrls.recommended, '.recommended-books-dropdown');
+      fetchAndDisplayBooks(apiUrls.newArrivals, '.new-arrival-container');
+      fetchAndDisplayBooks(apiUrls.favorites, '.fav-container');
+      fetchAndDisplayVideos(apiUrls.videos, '.videos-container');
+    });
+  </script>
+
+    <style>
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      margin-left: 68rem;
+    }
+
+    .overlay-content {
+  position: relative;
+  width: 80%;
+  max-width: 90vw;
+  height: 90%;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 3rem;
+      font-weight: 900;
+      cursor: pointer;
+      color: red;
+    }
+
+    #preview-frame {
+      width: 100%;
+      height: 90%;
+    }
+
+    .book, .video {
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      display: inline-block;
+      text-align: center;
+      width: 200px;
+    }
+
+    .book img, .video img {
+      width: 100%;
+      height: auto;
+    }
+
+    button {
+      background: #27ae60;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      margin-top: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #219150;
+    }
+
+    @media (max-width: 768px) {
+      .section-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .overlay{
+        margin-left: 43.5rem;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .section-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .overlay{
+        margin-left: 38rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .section-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .overlay{
+        margin-left: 27rem;
+      }
+    }
+
+    @media (max-width: 350px) {
+      .section-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .overlay{
+        margin-left: 25rem;
+      }
+    }
+  </style>
+
+  </body>
+
+</html>

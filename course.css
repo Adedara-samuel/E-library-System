@@ -1,0 +1,251 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+* {
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  text-transform: capitalize;
+  text-decoration: none;
+  transition: all 0.3s linear;
+}
+
+:root {
+  --white: #fff;
+  --green: #27ae60;
+  --dark-green: #219150;
+  --black: #444;
+  --light-color: #666;
+  --border: 0.1rem solid rgba(0, 0, 0, 0.1);
+  --border-hover: 0.1rem solid var(--black);
+  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  --background-color: var(--white);
+  --text-color: var(--black);
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+.course-section,
+.video-section {
+  margin-top: 7rem;
+  padding: 2rem 5%;
+  background: var(--white);
+}
+
+.course-section h2,
+.video-section h2 {
+  font-size: 3rem;
+  color: var(--green);
+  margin-bottom: 2rem;
+  border-bottom: 0.2rem solid var(--green);
+  padding-bottom: 0.5rem;
+}
+
+.course-list,
+.video-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.course-item,
+.video-item {
+  background: var(--white);
+  border: var(--border);
+  box-shadow: var(--box-shadow);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  width: calc(33.333% - 2rem);
+}
+
+.course-item img,
+.video-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.course-item-content,
+.video-item-content {
+  padding: 1.5rem;
+}
+
+.course-item h3,
+.video-item h3 {
+  font-size: 2rem;
+  color: var(--black);
+  margin-bottom: 1rem;
+}
+
+.course-item p,
+.video-item p {
+  font-size: 1.4rem;
+  color: var(--light-color);
+  margin-bottom: 1rem;
+}
+
+.course-item a,
+.video-item a {
+  font-size: 1.6rem;
+  color: var(--green);
+}
+
+.course-item a:hover,
+.video-item a:hover {
+  text-decoration: underline;
+}
+
+.course-item .favorite-btn,
+.video-item .favorite-btn {
+  display: inline-block;
+  font-size: 2rem;
+  color: var(--black);
+  cursor: pointer;
+}
+
+.course-item .favorite-btn:hover,
+.video-item .favorite-btn:hover {
+  color: var(--green);
+}
+
+/* Reader Mode */
+.reader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.reader-content {
+  background: white;
+  width: 85%;
+  height: 89%;
+  position: relative;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  transform: scale(0.8);
+  animation: popIn 0.3s forwards;
+}
+
+.reader-content iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.close-reader {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  color: firebrick;
+  border: none;
+  font-size: 2rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.close-reader:hover {
+  transform: scale(1.2);
+}
+
+/* Read Button */
+.read-btn {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  padding: 5px 12px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: 0.3s ease-in-out;
+  display: flex;
+  align-self: flex-end;
+  justify-self: center;
+}
+
+.read-btn:hover {
+  background-color: #219150;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popIn {
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .body {
+    width: 100%;
+    height: auto;
+  }
+
+  .course-item,
+  .video-item {
+    width: calc(50% - 1rem);
+  }
+
+  .container {
+    padding: 10px;
+  }
+
+  .course-detail-container,
+  .video-detail-container {
+    padding: 10px;
+  }
+
+  .course-detail-container h1,
+  .video-detail-container h1 {
+    font-size: 20px;
+  }
+
+  .course-section,
+  .video-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .course-section {
+    margin-top: -2.5rem;
+  }
+
+  .video-section {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .course-item,
+  .video-item {
+    width: 100%;
+  }
+}

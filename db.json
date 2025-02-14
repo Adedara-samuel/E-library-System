@@ -1,0 +1,24 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "Introduction to Algorithms",
+      "author": "Thomas H. Cormen",
+      "image": "https://example.com/intro-to-algorithms.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Artificial Intelligence: A Modern Approach",
+      "author": "Stuart Russell",
+      "image": "https://example.com/ai-modern-approach.jpg"
+    }
+  ],
+  "videos": [
+    {
+      "id": 1,
+      "title": "Machine Learning Basics",
+      "instructor": "Andrew Ng",
+      "image": "https://example.com/ml-basics.jpg"
+    }
+  ]
+}

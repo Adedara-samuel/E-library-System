@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course</title>
+  <link rel="stylesheet" href="styling.css">
+  <link rel="stylesheet" href="course.css">
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+  <header id="main-header">
+    <div class="header1">
+      <a href="#" class="logo"><i class="fas fa-book"></i> E-book</a>
+      <form class="search-form">
+        <input type="search" placeholder="Search here..." id="search-box">
+        <label for="search-box" class="fas fa-search"></label>
+      </form>
+      <div class="icons">
+        <div id="search_btn" class="fas fa-search"></div>
+        <a href="#" class="fas fa-heart"></a>
+        <a href="profile.html" class="fas fa-user"></a>
+        <div id="logout-btn" class="fas fa-sign-out-alt"></div>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="side-bar">
+        <nav class="navbar">
+          <a href="dashboard.html"><i
+              class="fas fa-home"></i><span>Dashboard</span></a>
+          <a href="profile.html"><i
+              class="fas fa-user"></i><span>Profile</span></a>
+          <a href="course.html"><i
+              class="fas fa-book"></i><span>Course</span></a>
+          <a href="adminblock.html"><i class="fas fa-briefcase"></i><span>Admin
+              Block</span></a>
+          <a href="FAQ.html"><i
+              class="fas fa-question-circle"></i><span>FAQ</span></a>
+        </nav>
+        <button class="toggle-btn"><i class="fas fa-arrow-left"></i></button>
+      </div>
+
+      <nav class="bottom-nav show">
+        <a href="dashboard.html" class="fas fa-home"></a>
+        <a href="profile.html" class="fas fa-user"></a>
+        <a href="course.html" class="fas fa-book"></a>
+        <a href="adminblock.html" class="fas fa-briefcase"></a>
+        <a href="FAQ.html" class="fas fa-question-circle"></a>
+      </nav>
+
+    <div class="body">
+      <section class="course-section" id="courses">
+        <h2>Courses</h2>
+        <div class="course-list"></div>
+      </section>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const searchBox = document.getElementById("search-box");
+      const searchResultsContainer = document.querySelector(".course-list");
+      const courses = ["HTML", "CSS", "JavaScript", "Python", "Java", "React", "Data Science", "Machine Learning"];
+
+      function fetchBooksForCourse(courseName) {
+        const searchUrl = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(courseName)}&maxResults=5&key=AIzaSyDhPs30ugnwJsmDujXweYWyGBSUJ7Y_5Ic`;
+        fetch(searchUrl)
+          .then(response => response.json())
+          .then(data => {
+            if (data.items && data.items.length > 0) {
+              data.items.forEach(item => {
+                const book = item.volumeInfo;
+                const bookElement = document.createElement("div");
+                bookElement.className = "course-item";
+                bookElement.innerHTML = `
+                  <div class="course-thumbnail">
+                    <img src="${book.imageLinks?.thumbnail || 'default-thumbnail.jpg'}" alt="${book.title}">
+                  </div>
+                  <div class="course-info">
+                    <h3>${book.title}</h3>
+                    <p>By ${book.authors?.join(", ") || "Unknown Author"}</p>
+                    <button class="read-btn" onclick="openBookReader('${item.id}')">Read</button>
+                  </div>
+                `;
+                searchResultsContainer.appendChild(bookElement);
+              });
+            }
+          })
+          .catch(error => console.error("Error fetching books:", error));
+      }
+
+      courses.forEach(course => fetchBooksForCourse(course));
+
+      searchBox.addEventListener("input", () => {
+        const query = searchBox.value.trim().toLowerCase();
+        document.querySelectorAll(".course-item").forEach(item => {
+          const title = item.querySelector("h3").textContent.toLowerCase();
+          item.style.display = title.includes(query) ? "block" : "none";
+        });
+      });
+
+      window.openBookReader = (bookId) => {
+        const readerOverlay = document.createElement("div");
+        readerOverlay.className = "reader-overlay fade-in";
+        readerOverlay.innerHTML = `
+          <div class="reader-content">
+            <iframe src="https://books.google.com/books?id=${bookId}&printsec=frontcover&output=embed" allowfullscreen></iframe>
+            <button class="close-reader" onclick="closeReader()">✖</button>
+          </div>
+        `;
+        document.body.appendChild(readerOverlay);
+      };
+
+      window.closeReader = () => {
+        document.querySelector(".reader-overlay").remove();
+      };
+    });
+  </script>
+
+</body>
+</html>

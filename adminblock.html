@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Block</title>
+    <link rel="stylesheet" href="styling.css">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- <link rel="shortcut icon" href="logo.png"> -->
+    <script>
+    
+  </script>
+  </head>
+
+  <body>
+    <header>
+      <div class="header1">
+        <a href="#" class="logo"><i class="fas fa-book"></i> E-book</a>
+        <form class="search-form">
+          <input type="search" placeholder="  Search here..." id="search box">
+          <label for="search box" class="fas fa-search"></label>
+        </form>
+        <div class="icons">
+          <!-- <div id="search_btn" class="fas fa-search"></div> -->
+          <a href="#" class="fas fa-heart"></a>
+          <a href="profile.html" class="fas fa-user"></a>
+          <div class="admin-dropdown">
+            <i class="fas fa-briefcase"></i>
+            <div class="admin-sidebar">
+              <div class="sidebar-header">
+                <h3>Admin Options</h3>
+                <button class="close-btn"><i class="fas fa-times"></i></button>
+              </div>
+              <div class="admin-options">
+                <a href="adminblock.html" class="admin-opts"><i class="fas fa-upload"></i> Upload</a>
+                <a href="edit.html" class="admin-opts"><i class="fas fa-edit"></i> Edit</a>
+                <a href="delete.html" class="admin-opts"><i class="fas fa-trash-alt"></i> Delete</a>
+                <a href="reset-user.html" class="admin-opts"><i class="fas fa-key"></i> Reset Password</a>
+                <a href="activate-user.html" class="admin-opts"><i class="fas fa-user-slash"></i>
+                    Activate/Deactivate</a>
+                <a href="permission.html" class="admin-opts"><i class="fas fa-user-lock"></i>
+                    Permissions</a>
+                <a href="student-progess.html" class="admin-opts"><i class="fas fa-book-bookmark"></i>
+                    View Student Progress</a>
+            </div>
+            </div>
+          </div>
+          <div id="logout-btn" class="fas fa-sign-out-alt"></div>
+        </div>
+      </div>
+
+      <!-- favourite sidebar  -->
+      <div class="fav-sidebar">
+        <div class="sidebar-header">
+          <h3>Favorites</h3>
+          <button class="close-btn"><i class="fa fa-times"></i></button>
+        </div>
+        <div class="sidebar-content">
+          <!-- Favorite items will be dynamically added here -->
+        </div>
+      </div>
+
+    </header>
+    <section>
+      <div class="side-bar">
+        <nav class="navbar">
+          <a href="dashboard.html"><i
+              class="fas fa-home"></i><span>dashboard</span></a>
+          <a href="profile.html"><i
+              class="fas fa-user"></i><span>profile</span></a>
+          <a href="course.html"><i
+              class="fas fa-book"></i><span>course</span></a>
+          <a href="adminblock.html"><i class="fas fa-briefcase"></i><span>admin
+              block</span></a>
+          <a href="FAQ.html"><i
+              class="fas fa-question-circle"></i><span>FAQ</span></a>
+        </nav>
+        <button class="toggle-btn"><i class="fas fa-arrow-left"></i></button>
+      </div>
+
+      <nav class="bottom-nav show">
+        <a href="dashboard.html" class="fas fa-home"></a>
+        <a href="profile.html" class="fas fa-user"></a>
+        <a href="course.html" class="fas fa-book"></a>
+        <a href="adminblock.html" class="fas fa-briefcase"></a>
+        <a href="FAQ.html" class="fas fa-question-circle"></a>
+      </nav>
+      <div class="body">
+
+        <section class="upload-section">
+          <h1>Upload Books and Videos</h1>
+          <div class="upload-form">
+            <form id="uploadForm">
+              <div class="form-group">
+                <label for="type">Type:</label>
+                <select id="type" name="type" onchange="toggleUploadFields()">
+                  <option value="book">Book</option>
+                  <option value="video">Video</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+              </div>
+
+              <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="5"
+                  required></textarea>
+              </div>
+
+              <div id="fileFields" class="form-group">
+                <label for="file">File:</label>
+                <input type="file" id="file" name="file"
+                  accept=".pdf,.doc,.docx,.mp4" required>
+              </div>
+
+              <div id="videoFields" style="display: none;">
+                <div class="form-group">
+                  <label for="duration">Duration:</label>
+                  <input type="text" id="duration" name="duration"
+                    placeholder="HH:MM:SS">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <button type="submit" onclick={handleBookUpload}>Upload</button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script src="fav.js"></script>
+    <script src="admin.js"></script>
+    <script>
+  document.getElementById("uploadForm").addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent actual form submission
+
+    let type = document.getElementById("type").value;
+    let title = document.getElementById("title").value.trim();
+    let description = document.getElementById("description").value.trim();
+    let fileInput = document.getElementById("file");
+    let file = fileInput.files[0];
+
+    // Validate fields
+    if (!title) {
+        alert("⚠️ Title is required!");
+        return;
+    }
+    if (!description) {
+        alert("⚠️ Description is required!");
+        return;
+    }
+    if (!file) {
+        alert("⚠️ Please upload a file.");
+        return;
+    }
+
+    // Create a temporary URL for preview
+    let fileURL = URL.createObjectURL(file);
+
+    // Create an uploaded item section dynamically
+    let uploadedContent = document.createElement("div");
+    uploadedContent.classList.add("uploaded-item");
+
+    uploadedContent.innerHTML = `
+        <h3>${title} (${type})</h3>
+        <p>${description}</p>
+        ${type === "book" 
+            ? `<a href="${fileURL}" target="_blank">📖 View Book</a>` 
+            : `<video width="320" controls><source src="${fileURL}" type="video/mp4">Your browser does not support video.</video>`}
+        <hr>
+    `;
+
+    document.querySelector(".body").appendChild(uploadedContent);
+
+    // Show success message and refresh page after user clicks "OK"
+    alert("✅ Upload successful!");
+    location.reload();
+});
+
+
+</script>
+  </body>
+
+</html>

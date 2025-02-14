@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <link rel="stylesheet" href="styling.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+  <header>
+    <div class="header1">
+      <a href="#" class="logo"><i class="fas fa-book"></i> E-book</a>
+      <form class="search-form">
+        <input type="search" placeholder="Search here..." id="search-box">
+        <label for="search-box" class="fas fa-search"></label>
+      </form>
+      <div class="icons">
+        <div id="search_btn" class="fas fa-search"></div>
+        <!-- <a href="#" class="fas fa-heart"></a> -->
+        <a href="#" class="fas fa-cog"></a>
+        <div id="logout-btn" class="fas fa-sign-out-alt"></div>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="side-bar">
+      <nav class="navbar">
+        <a href="dashboard.html"><i class="fas fa-home"></i><span>Dashboard</span></a>
+        <a href="profile.html"><i class="fas fa-user"></i><span>Profile</span></a>
+        <a href="course.html"><i class="fas fa-book"></i><span>Course</span></a>
+        <a href="adminblock.html"><i class="fas fa-briefcase"></i><span>Admin Block</span></a>
+        <a href="FAQ.html"><i class="fas fa-question-circle"></i><span>FAQ</span></a>
+      </nav>
+      <button class="toggle-btn"><i class="fas fa-arrow-left"></i></button>
+    </div>
+
+    <nav class="bottom-nav show">
+      <a href="dashboard.html" class="fas fa-home"></a>
+      <a href="profile.html" class="fas fa-user"></a>
+      <a href="course.html" class="fas fa-book"></a>
+      <a href="adminblock.html" class="fas fa-briefcase"></a>
+      <a href="FAQ.html" class="fas fa-question-circle"></a>
+    </nav>
+
+    <div class="body">
+      <div class="profile-header">
+        <div class="profile-picture">
+          <img src="profile-picture.jpeg" alt="Profile Picture">
+        </div>
+        <div class="profile-header-info">
+          <h1>John Doe</h1>
+          <p>@Psalmuel</p>
+          <button>Edit Profile</button>
+        </div>
+      </div>
+
+      <div class="profile-details">
+        <div class="details">
+          <h2>Profile Details</h2>
+          <p><strong>Name:</strong> John Doe</p>
+          <p><strong>Surname:</strong> Doe</p>
+          <p><strong>Username:</strong> Psalmuel</p>
+          <p><strong>Matric Number:</strong> 123456789</p>
+          <p><strong>Email:</strong> john.doe@email.com</p>
+          <p><strong>Location:</strong> New York, USA</p>
+          <p><strong>Joined:</strong> January 2024</p>
+        </div>
+      </div>
+
+      <div class="profile-tabs">
+        <a href="#" id="favorites-tab" class="active">Favorites</a>
+        <a href="#" id="history-tab">History</a>
+        <a href="#" id="books-tab">Books Read</a>
+        <a href="#" id="videos-tab">Videos Watched</a>
+        <a href="#" id="videos-tab">Audio listened</a>
+      </div>
+
+      <div class="profile-tabs-icons">
+        <a href="#" id="favorites-icon" class="active">
+          <i class="fas fa-heart" onmouseover="showOverlay('favorites-overlay')"
+            onmouseout="hideOverlay('favorites-overlay')"></i>
+          <div id="favorites-overlay" class="overlay">Favorites</div>
+        </a>
+        <a href="#" id="history-icon">
+          <i class="fas fa-history" onmouseover="showOverlay('history-overlay')"
+            onmouseout="hideOverlay('history-overlay')"></i>
+          <div id="history-overlay" class="overlay">History</div>
+        </a>
+        <a href="#" id="books-icon">
+          <i class="fas fa-book" onmouseover="showOverlay('books-overlay')"
+            onmouseout="hideOverlay('books-overlay')"></i>
+          <div id="books-overlay" class="overlay">Books Read</div>
+        </a>
+        <a href="#" id="videos-icon">
+          <i class="fas fa-video" onmouseover="showOverlay('videos-overlay')"
+            onmouseout="hideOverlay('videos-overlay')"></i>
+          <div id="videos-overlay" class="overlay">Videos Watched</div>
+        </a>
+        <a href="#" id="videos-icon">
+          <i class="fas fa-audio-description" onmouseover="showOverlay('videos-overlay')"
+            onmouseout="hideOverlay('videos-overlay')"></i>
+          <div id="videos-overlay" class="overlay">Videos Watched</div>
+        </a>
+      </div>
+
+      <div class="profile-content">
+        <div id="favorites-content" class="content-section active">
+          <h2>Favorites</h2>
+          <div class="favorites-list">
+            <div class="card">
+              <img src="book1-cover.jpg" alt="Book 1">
+              <div class="card-info">
+                <h3>Book Title 1</h3>
+                <p>Author 1</p>
+              </div>
+            </div>
+            <div class="card">
+              <img src="book2-cover.jpg" alt="Book 2">
+              <div class="card-info">
+                <h3>Book Title 2</h3>
+                <p>Author 2</p>
+              </div>
+            </div>
+            <div class="card">
+              <img src="book3-cover.jpg" alt="Book 3">
+              <div class="card-info">
+                <h3>Book Title 3</h3>
+                <p>Author 3</p>
+              </div>
+            </div>
+            <!-- Add more cards as needed -->
+          </div>
+        </div>
+
+        <div id="history-content" class="content-section">
+          <h2>History</h2>
+          <div class="history-list">
+            <div class="card">
+              <img src="book1-cover.jpg" alt="Book 1">
+              <div class="card-info">
+                <h3>Book Title 1</h3>
+                <p>Author 1</p>
+              </div>
+            </div>
+            <div class="card">
+              <img src="book2-cover.jpg" alt="Book 2">
+              <div class="card-info">
+                <h3>Book Title 2</h3>
+                <p>Author 2</p>
+              </div>
+            </div>
+            <div class="card">
+              <img src="book3-cover.jpg" alt="Book 3">
+              <div class="card-info">
+                <h3>Book Title 3</h3>
+                <p>Author 3</p>
+              </div>
+            </div>
+            <!-- Add more cards as needed -->
+          </div>
+        </div>
+
+        <div id="books-content" class="content-section">
+          <h2>Books Read</h2>
+          <div class="books-read-list">
+            <div class="card">
+              <img src="book1-cover.jpg" alt="Book 1">
+              <div class="card-info">
+                <h3>Book Title 1</h3>
+                <p>Author 1</p>
+              </div>
+            </div>
+            <div class="card">
+              <img src="book2-cover.jpg" alt="Book 2">
+              <div class="card-info">
+                <h3>Book Title 2</h3>
+                <p>Author 2</p>
+              </div>
+            </div>
+            <div class="card">
+              <img src="book3-cover.jpg" alt="Book 3">
+              <div class="card-info">
+                <h3>Book Title 3</h3>
+                <p>Author 3</p>
+              </div>
+            </div>
+            <!-- Add more cards as needed -->
+          </div>
+        </div>
+
+        <div id="videos-content" class="content-section">
+          <h2>Videos Watched</h2>
+          <div class="videos-watched-list">
+            <div class="card">
+              <img src="video1-cover.jpg" alt="Video 1">
+              <div class="card-info">
+                <h3>Video Title 1</h3>
+                <p>Instructor 1</p>
+              </div>
+            </div>
+            <div class="card">
+              <img src="video2-cover.jpg" alt="Video 2">
+              <div class="card-info">
+                <h3>Video Title 2</h3>
+                <p>Instructor 2</p>
+              </div>
+            </div>
+            <div class="card">
+              <img src="video3-cover.jpg" alt="Video 3">
+              <div class="card-info">
+                <h3>Video Title 3</h3>
+                <p>Instructor 3</p>
+              </div>
+            </div>
+            <!-- Add more cards as needed -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- settings section -->
+    <div id="settings" class="settings-panel">
+      <button class="close-btn">&times;</button>
+      <h2>Settings</h2>
+
+      <div class="settings-option">
+        <h3>Account Settings</h3>
+        <select id="password-dropdown">
+          <option value="">Select option</option>
+          <option value="change-password">Change Password</option>
+          <option value="add-account">Add account</option>
+        </select>
+      </div>
+
+      <div id="change-password-form" class="settings-form">
+        <form id="password-form">
+          <h3>Change Password</h3>
+          <div class="form-group">
+            <label for="new-password">New Password</label>
+            <input type="password" id="new-password" name="new-password" required>
+          </div>
+          <div class="form-group">
+            <label for="confirm-password">Confirm New Password</label>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+          </div>
+          <button type="submit" class="btn-submit">Change Password</button>
+        </form>
+      </div>
+
+      <div class="settings-option">
+        <h3>Appearance</h3>
+        <select id="theme-dropdown">
+          <option value="">Select theme</option>
+          <option value="light">Light Theme</option>
+          <option value="dark">Dark Theme</option>
+          <!-- Add more appearance-related options -->
+        </select>
+      </div>
+
+      <div class="settings-option">
+        <h3>Notifications</h3>
+        <select id="notifications-dropdown">
+          <option value="email">Email Notifications</option>
+          <option value="push">Push Notifications</option>
+          <!-- Add more notification options -->
+        </select>
+      </div>
+
+      <div class="settings-option">
+        <h3>Preferences</h3>
+        <select id="language-dropdown">
+          <option value="">Select option</option>
+          <option value="english">English</option>
+          <option value="spanish">Spanish</option>
+          <!-- Add more language options -->
+        </select>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span id="modal-close" class="close">&times;</span>
+        <p id="modal-message"></p>
+        <button id="modal-ok">OK</button>
+      </div>
+    </div>
+
+  </section>
+
+  <script src="script.js"></script>
+  <script src="fav.js"></script>
+  <script>
+    // Your additional JavaScript code can go here
+  </script>
+  
+</body>
+
+</html>

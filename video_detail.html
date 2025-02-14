@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Detail</title>
+  <link rel="stylesheet" href="styling.css">
+  <link rel="stylesheet" href="course.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+  <header>
+    <div class="header1">
+      <a href="#" class="logo"><i class="fas fa-book"></i> E-book</a>
+      <form class="search-form">
+        <input type="search" placeholder="Search here..." id="search-box">
+        <label for="search-box" class="fas fa-search"></label>
+      </form>
+      <div class="icons">
+        <div id="search-btn" class="fas fa-search"></div>
+        <a href="" class="fas fa-heart"></a>
+        <a href="" class="fas fa-user"></a>
+        <div id="logout-btn" class="fas fa-sign-out-alt"></div>
+      </div>
+    </div>
+
+    <!-- favourite sidebar  -->
+    <div class="fav-sidebar">
+      <div class="sidebar-header">
+        <h3>Favorites</h3>
+        <button class="close-btn"><i class="fa fa-times"></i></button>
+      </div>
+      <div class="sidebar-content">
+        <!-- Favorite items will be dynamically added here -->
+      </div>
+    </div>
+  </header>
+  <section>
+    <div class="side-bar">
+      <nav class="navbar">
+        <a href="dashboard.html"><i class="fas fa-home"></i><span>Dashboard</span></a>
+        <a href="profile.html"><i class="fas fa-user"></i><span>Profile</span></a>
+        <a href="course.html"><i class="fas fa-book"></i><span>Course</span></a>
+        <a href="adminblock.html"><i class="fas fa-briefcase"></i><span>Admin Block</span></a>
+        <a href="FAQ.html"><i class="fas fa-question-circle"></i><span>FAQ</span></a>
+      </nav>
+      <button class="toggle-btn"><i class="fas fa-arrow-left"></i></button>
+    </div>
+
+    <nav class="bottom-nav show">
+      <a href="dashboard.html" class="fas fa-home"></a>
+      <a href="profile.html" class="fas fa-user"></a>
+      <a href="course.html" class="fas fa-book"></a>
+      <a href="adminblock.html" class="fas fa-briefcase"></a>
+      <a href="FAQ.html" class="fas fa-question-circle"></a>
+    </nav>
+
+    <div class="body">
+      <div class="video-detail-container">
+        <header>
+          <h1 id="video-title">Video Title</h1>
+        </header>
+        <div id="video-description">Video description goes here.</div>
+        <button id="back-button">Back to Videos</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="video_detail.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Block</title>
+    <link rel="stylesheet" href="styling.css">
+    <link rel="stylesheet" href="student-pregress.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="header1">
+            <a href="#" class="logo"><i class="fas fa-book"></i> E-Library</a>
+            <form class="search-form">
+                <input type="search" placeholder="  Search here..." id="search-box">
+                <label for="search-box" class="fas fa-search"></label>
+            </form>
+            <div class="icons">
+                <a href="#" class="fas fa-heart"></a>
+                <a href="profile.html" class="fas fa-user"></a>
+                <div class="admin-dropdown">
+                    <i class="fas fa-briefcase"></i>
+                    <div class="admin-sidebar">
+                        <div class="sidebar-header">
+                            <h3>Admin Options</h3>
+                            <button class="close-btn"><i class="fas fa-times"></i></button>
+                        </div>
+                        <div class="admin-options">
+                            <a href="adminblock.html" class="admin-opts"><i class="fas fa-upload"></i> Upload</a>
+                            <a href="edit.html" class="admin-opts"><i class="fas fa-edit"></i> Edit</a>
+                            <a href="delete.html" class="admin-opts"><i class="fas fa-trash-alt"></i> Delete</a>
+                            <a href="reset-user.html" class="admin-opts"><i class="fas fa-key"></i> Reset Password</a>
+                            <a href="activate-user.html" class="admin-opts"><i class="fas fa-user-slash"></i>
+                                Activate/Deactivate</a>
+                            <a href="permission.html" class="admin-opts"><i class="fas fa-user-lock"></i>
+                                Permissions</a>
+                            <a href="student-progess.html" class="admin-opts"><i class="fas fa-book-bookmark"></i>
+                                View Student Progress</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="logout-btn" class="fas fa-sign-out-alt"></div>
+            </div>
+        </div>
+    </header>
+
+    <section>
+        <div class="side-bar">
+            <nav class="navbar">
+              <a href="dashboard.html"><i class="fas fa-home"></i><span>dashboard</span></a>
+              <a href="profile.html"><i class="fas fa-user"></i><span>profile</span></a>
+              <a href="course.html"><i class="fas fa-book"></i><span>course</span></a>
+              <a href="adminblock.html"><i class="fas fa-briefcase"></i><span>admin block</span></a>
+              <a href="FAQ.html"><i class="fas fa-question-circle"></i><span>FAQ</span></a>
+            </nav>
+            <button class="toggle-btn"><i class="fas fa-arrow-left"></i></button>
+          </div>
+      
+          <nav class="bottom-nav show">
+            <a href="dashboard.html" class="fas fa-home"></a>
+            <a href="profile.html" class="fas fa-user"></a>
+            <a href="course.html" class="fas fa-book"></a>
+            <a href="adminblock.html" class="fas fa-briefcase"></a>
+            <a href="FAQ.html" class="fas fa-question-circle"></a>
+          </nav>
+        </div>
+
+        <section class="admin-section">
+            <h1>Student Progress</h1>
+            <table id="accessTable">
+                <thead>
+                    <tr>
+                        <th>Matric Number</th>
+                        <th>Student Name</th>
+                        <th>Material Type</th>
+                        <th>Material Title</th>
+                        <th>Duration</th>
+                        <th>Access Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Sample row for dynamic content -->
+                    <tr>
+                        <td>12345</td>
+                        <td>John Doe</td>
+                        <td>Video</td>
+                        <td>Introduction to HTML</td>
+                        <td>15 minutes</td>
+                        <td>2024-12-22</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div id="detailsModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h2>Student Detailed Progress</h2>
+                <p><strong>Matric Number: </strong><span id="matricDetail"></span></p>
+                <p><strong>Student Name: </strong><span id="nameDetail"></span></p>
+                <p><strong>Material Type: </strong><span id="typeDetail"></span></p>
+                <p><strong>Material Title: </strong><span id="titleDetail"></span></p>
+                <p><strong>Duration: </strong><span id="durationDetail"></span></p>
+                <p><strong>Access Date: </strong><span id="dateDetail"></span></p>
+                <!-- Add more details as necessary -->
+            </div>
+        </div>
+
+    </section>
+
+    <script src="script.js"></script>
+    <script src="stdent-progress.js"></script>
+</body>
+
+</html>
